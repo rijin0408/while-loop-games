@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select a Game</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image" href="../icon.png" />
+    <!-- Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <a href="index.html" class="back-home-btn"> ← Back to Home </a>
+    <div class="page-bg">
+      <div class="main-card">
+        <h1 class="title mb-2">Choose One Game</h1>
+        <p class="subtitle mb-4">
+          Choose wisely. The class will play only ONE.
+        </p>
+
+        <div class="game-list">
+          <div class="game-card-long" onclick="selectGame(this, 'game1')">
+            <h3>Challenge 1</h3>
+            <p>Tap to reveal</p>
+          </div>
+
+          <div class="game-card-long" onclick="selectGame(this, 'game2')">
+            <h3>Challenge 2</h3>
+            <p>Tap to reveal</p>
+          </div>
+
+          <div class="game-card-long" onclick="selectGame(this, 'game3')">
+            <h3>Challenge 3</h3>
+            <p>Tap to reveal</p>
+          </div>
+
+          <div class="game-card-long" onclick="selectGame(this, 'game4')">
+            <h3>Challenge 4</h3>
+            <p>Tap to reveal</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POPUP GAME WINDOW -->
+    <div id="gameModal" class="game-modal d-none">
+      <div class="game-modal-content">
+        <div id="colorBox" class="color-box mb-4 d-none"></div>
+
+        <h2 id="gameTitle" class="modal-title mb-3"></h2>
+        <div id="gameDesc" class="code-box"></div>
+
+        <div id="rngBox" class="rng-box d-none">
+          <div id="rngNumber">0</div>
+          <button id="rngBtn" class="btn btn-primary mt-3">
+            Generate Number
+          </button>
+        </div>
+
+        <button id="startColorGame" class="btn btn-primary mt-3 d-none">
+          Start Color Loop
+        </button>
+
+        <br /><br />
+        <button class="btn btn-secondary mt-2" onclick="closeGame()">
+          Close Game
+        </button>
+      </div>
+    </div>
+
+    <script src="../javascript/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,430 @@
+/* =========================================================
+   BASE + BACKGROUND
+========================================================= */
+body {
+  font-family: "Inter", sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, #3b82f610, transparent 40%),
+    radial-gradient(circle at 80% 80%, #60a5fa15, transparent 40%),
+    linear-gradient(180deg, #eef2ff, #f8fafc);
+  margin: 0;
+  color: #0f172a;
+  font-size: 18px;
+}
+
+/* floating background glow */
+body::before {
+  content: "";
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #3b82f620, transparent 60%);
+  top: -200px;
+  left: -200px;
+  z-index: -1;
+}
+body::after {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #60a5fa20, transparent 60%);
+  bottom: -200px;
+  right: -200px;
+  z-index: -1;
+}
+
+/* =========================================================
+   TITLES
+========================================================= */
+.title {
+  font-size: 56px;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #475569;
+}
+
+/* =========================================================
+   PAGE CENTER LAYOUT
+========================================================= */
+.page-bg {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* main white container */
+.main-card {
+  background: white;
+  padding: 65px 70px;
+  border-radius: 28px;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e7eb;
+  width: 650px;
+  max-width: 95%;
+  text-align: center;
+  position: relative;
+}
+
+/* subtle divider under title */
+.main-card::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #2563eb;
+  margin: 22px auto 0 auto;
+  border-radius: 4px;
+  opacity: 0.2;
+}
+
+/* =========================================================
+   GAME LIST
+========================================================= */
+.game-list {
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* =========================================================
+   GAME CARDS
+========================================================= */
+.game-card-long {
+  background: white;
+  border-radius: 20px;
+  padding: 28px 30px;
+  margin: 18px 0;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border 0.25s ease;
+  text-align: left;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+  font-size: 18px;
+}
+
+/* hover glow sweep */
+.game-card-long::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, #3b82f620, transparent);
+  opacity: 0;
+  transition: 0.3s;
+}
+.game-card-long:hover::before {
+  opacity: 1;
+}
+
+/* hover effect */
+.game-card-long:hover {
+  transform: translateY(-6px) scale(1.02);
+  border: 1px solid #2563eb;
+  box-shadow: 0 25px 60px rgba(37, 99, 235, 0.18);
+}
+
+/* click effect */
+.game-card-long:active {
+  transform: scale(0.98);
+}
+
+/* text inside cards */
+.game-card-long h3 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.game-card-long p {
+  margin: 6px 0 0 0;
+  font-size: 14px;
+  color: #64748b;
+  opacity: 0.85;
+}
+
+/* selection highlight */
+.game-card-long.selected {
+  border: 2px solid #2563eb;
+  box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.15);
+}
+
+.game-card-long.faded {
+  opacity: 0.35;
+  transform: scale(0.96);
+}
+
+/* =========================================================
+   MODAL BACKDROP
+========================================================= */
+.game-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   MODAL BOX
+========================================================= */
+.game-modal-content {
+  background: white;
+  padding: 55px 60px;
+  border-radius: 26px;
+  width: min(720px, 92%);
+  text-align: center;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.2);
+  animation: pop 0.35s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* closing animation */
+.game-modal.closing {
+  animation: fadeOut 0.3s ease forwards;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+.game-modal-content.closing {
+  animation: scaleDown 0.3s ease forwards;
+}
+@keyframes scaleDown {
+  to {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* =========================================================
+   MODAL TITLE + TEXT
+========================================================= */
+.modal-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #1e3a8a;
+  margin-bottom: 15px;
+  letter-spacing: -0.5px;
+}
+
+#gameDesc {
+  font-size: 22px;
+  line-height: 1.9;
+  color: #334155;
+}
+
+/* =========================================================
+   COLOR GAME BOX
+========================================================= */
+.color-box {
+  height: 130px;
+  border-radius: 18px;
+  background: #e2e8f0;
+  margin-bottom: 30px;
+  border: 3px solid #cbd5e1;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.1);
+  transition: 0.25s;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: none;
+  border-radius: 14px;
+  padding: 14px 40px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3);
+  transition: 0.25s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 25px 60px rgba(37, 99, 235, 0.4);
+}
+
+.btn-secondary {
+  border-radius: 12px;
+}
+.btn-secondary:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+.back-home-btn {
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  text-decoration: none;
+  background: white;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  color: #1e3a8a;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+  z-index: 999;
+}
+
+.back-home-btn:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.3);
+}
+
+/* =========================================================
+   HOME PAGE CARD
+========================================================= */
+.home-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-card {
+  background: white;
+  padding: 70px 90px;
+  border-radius: 28px;
+  text-align: center;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e5e7eb;
+  max-width: 700px;
+}
+
+.home-title {
+  font-size: 56px;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+}
+
+.home-sub {
+  font-size: 20px;
+  color: #475569;
+  margin-bottom: 35px;
+}
+
+.start-btn-main {
+  display: inline-block;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  padding: 18px 48px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 16px;
+  text-decoration: none;
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.35);
+  transition: 0.25s;
+}
+
+.start-btn-main:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 25px 60px rgba(37, 99, 235, 0.45);
+}
+
+.home-foot {
+  margin-top: 25px;
+  color: #64748b;
+  font-size: 14px;
+}
+/* ===== RNG BOX ===== */
+.rng-box {
+  margin-top: 25px;
+  padding: 25px;
+  background: #f1f5f9;
+  border-radius: 20px;
+  border: 2px solid #e2e8f0;
+}
+
+#rngNumber {
+  font-size: 70px;
+  font-weight: 800;
+  color: #1e3a8a;
+  letter-spacing: 2px;
+}
+
+/* ===== CODE BOX ===== */
+.code-box {
+  background: #0b132b;
+  color: #ffffff;
+  font-family: "Courier New", monospace;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: left;
+  font-size: 24px;
+  line-height: 1.9;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+  margin-top: 15px;
+}
+
+/* WHILE / IF */
+.code-key {
+  color: #38bdf8;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+/* ACTIONS */
+.code-act {
+  color: #facc15;
+  font-weight: 600;
+}
+
+/* COMMENTS */
+.code-comment {
+  color: #cbd5f5;
+  font-style: italic;
+}
+
+/* CONDITIONS */
+.code-cond {
+  color: #e2e8f0;
+  font-weight: 500;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+}
