@@ -18,32 +18,34 @@ function showGame(game) {
     title.innerHTML = "While I Face You";
 
     desc.innerHTML = `
-    <span class="code-key running-loop">while</span> <span class="code-cond">(teacher is facing class)</span> {<br>
-    &nbsp;&nbsp;<span class="code-act">stand</span><br>
-    }<br><br>
+  <span class="code-key running-loop">while</span> <span class="code-cond">(teacher is facing class)</span> {<br>
+  &nbsp;&nbsp;<span class="code-act">stand</span><br><br>
 
-    <span class="code-key running-loop">while</span> <span class="code-cond">(teacher turns away)</span> {<br>
-    &nbsp;&nbsp;<span class="code-act">sit fast</span><br>
-    }<br><br>
+  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(teacher turns away)</span> {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">sit fast</span><br>
+  &nbsp;&nbsp;}<br>
+  }<br><br>
 
-    <span class="code-comment">// wrong move = eliminated</span>
-    `;
+  <span class="code-comment">// wrong move = eliminated</span>
+  `;
   }
 
   if (game === "game2") {
     title.innerHTML = "Counting Loop";
 
     desc.innerHTML = `
-    <span class="code-cond">start at 100</span><br><br>
-    
-    <span class="code-key running-loop">while</span> <span class="code-cond">(number is above 0)</span> {<br>
-    &nbsp;&nbsp;<span class="code-act">one student says number</span><br>
-    &nbsp;&nbsp;<span class="code-act">wait for random number</span><br>
-    &nbsp;&nbsp;<span class="code-act">subtract in your mind</span><br>
-    }<br><br>
-    
-    <span class="code-comment">// wrong answer = eliminated</span>
-    `;
+  <span class="code-cond">start at 100</span><br><br>
+
+  <span class="code-key running-loop">while</span> <span class="code-cond">(number is above 0)</span> {<br>
+  &nbsp;&nbsp;<span class="code-act">say the number</span><br>
+  &nbsp;&nbsp;<span class="code-act">wait for random number</span><br>
+  &nbsp;&nbsp;<span class="code-act">subtract it in your mind</span><br><br>
+
+  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(someone says wrong number)</span> {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">eliminated</span><br>
+  &nbsp;&nbsp;}<br>
+  }<br>
+  `;
 
     rngBox.classList.remove("d-none");
 
@@ -57,18 +59,18 @@ function showGame(game) {
     title.innerHTML = "Color Reaction Loop";
 
     desc.innerHTML = `
-    <span class="code-comment">// reaction test</span><br><br>
+  <span class="code-comment">// reaction test</span><br><br>
 
-    <span class="code-key running-loop">while</span> <span class="code-cond">(screen is blue or black)</span> {<br>
-    &nbsp;&nbsp;<span class="code-act">tap desk</span><br>
-    }<br><br>
+  <span class="code-key running-loop">while</span> <span class="code-cond">(screen shows blue or black)</span> {<br>
+  &nbsp;&nbsp;<span class="code-act">tap desk</span><br><br>
 
-    <span class="code-key running-loop">while</span> <span class="code-cond">(color changes)</span> {<br>
-    &nbsp;&nbsp;<span class="code-act">stop immediately</span><br>
-    }<br><br>
+  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(color changes)</span> {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">stop immediately</span><br>
+  &nbsp;&nbsp;}<br>
+  }<br><br>
 
-    <span class="code-comment">// wrong timing = eliminated</span>
-    `;
+  <span class="code-comment">// wrong timing = eliminated</span>
+  `;
 
     colorBox.classList.remove("d-none");
     startBtn.classList.remove("d-none");
@@ -79,18 +81,16 @@ function showGame(game) {
     title.innerHTML = "Guess Until Correct";
 
     desc.innerHTML = `
-    <span class="code-cond">secret number is hidden</span><br><br>
+  <span class="code-cond">secret number is hidden</span><br><br>
 
-    <span class="code-key running-loop">while</span> <span class="code-cond">(guess is not correct)</span> {<br>
-    &nbsp;&nbsp;<span class="code-act">students guess</span><br>
-    }<br><br>
+  <span class="code-key running-loop">while</span> <span class="code-cond">(guess is not correct)</span> {<br>
+  &nbsp;&nbsp;<span class="code-act">students guess</span><br><br>
 
-    <span class="code-key running-loop">while</span> <span class="code-cond">(correct guess)</span> {<br>
-    &nbsp;&nbsp;<span class="code-act">you are safe</span><br>
-    }<br><br>
-
-    <span class="code-comment">// wrong guess = eliminated</span>
-    `;
+  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(correct guess)</span> {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">you are safe</span><br>
+  &nbsp;&nbsp;}<br>
+  }<br>
+  `;
   }
 }
 
