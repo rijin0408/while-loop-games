@@ -15,43 +15,55 @@ function showGame(game) {
   startBtn.classList.add("d-none");
 
   if (game === "game1") {
-    title.innerHTML = "While I Face You";
+    title.innerHTML = "Sit or Stand?";
 
     desc.innerHTML = `
-  <span class="code-key running-loop">while</span> <span class="code-cond">(teacher is facing class)</span> {<br>
-  &nbsp;&nbsp;<span class="code-act">stand</span><br><br>
+<span class="code-comment">//everyone begins standing</span><br><br>
 
-  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(teacher turns away)</span> {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">sit fast</span><br>
-  &nbsp;&nbsp;}<br>
-  }<br><br>
+<span class="code-key running-loop">while</span> <span class="code-cond">(countdown is not 0)</span> {<br>
+&nbsp;&nbsp;<span class="code-act">watch the teacher</span><br><br>
 
-  <span class="code-comment">// wrong move = eliminated</span>
-  `;
+&nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(right hand is raised)</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">stand</span><br>
+&nbsp;&nbsp;}<br><br>
+
+&nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(left hand is raised)</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">sit</span><br>
+&nbsp;&nbsp;}<br><br>
+
+&nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(wrong move)</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">eliminated</span><br>
+&nbsp;&nbsp;}<br><br>
+
+&nbsp;&nbsp;<span class="code-act">countdown decreases</span><br>
+}<br><br>
+`;
   }
 
   if (game === "game2") {
     title.innerHTML = "Counting Loop";
 
     desc.innerHTML = `
-  <span class="code-cond">start at 100</span><br><br>
+    <span class="code-cond">number is 100</span><br>
+    <span class="code-comment">//students take turns in order</span><br><br>
 
-  <span class="code-key running-loop">while</span> <span class="code-cond">(number is above 0)</span> {<br>
-  &nbsp;&nbsp;<span class="code-act">say the number</span><br>
-  &nbsp;&nbsp;<span class="code-act">wait for random number</span><br>
-  &nbsp;&nbsp;<span class="code-act">subtract it in your mind</span><br><br>
+    <span class="code-key running-loop">while</span> <span class="code-cond">(number is above 0)</span> {<br>
+    &nbsp;&nbsp;<span class="code-act">say the current value of number</span><br>
+    &nbsp;&nbsp;<span class="code-act">generate a random number</span><br>
+    &nbsp;&nbsp;<span class="code-act">subtract it in your mind</span><br>
+    &nbsp;&nbsp;<span class="code-act">next student continues</span><br><br>
 
-  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(someone says wrong number)</span> {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">eliminated</span><br>
-  &nbsp;&nbsp;}<br>
-  }<br>
-  `;
+    &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(wrong number is said)</span> {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">eliminated</span><br>
+    &nbsp;&nbsp;}<br>
+    }<br><br>
+    `;
 
     rngBox.classList.remove("d-none");
 
     rngBtn.onclick = () => {
       const random = Math.floor(Math.random() * 9) + 1;
-      rngNumber.innerHTML = "-" + random;
+      rngNumber.innerHTML = random;
     };
   }
 
@@ -62,8 +74,8 @@ function showGame(game) {
   <span class="code-comment">// reaction test</span><br><br>
 
   <span class="code-key running-loop">while</span> <span class="code-cond">(screen shows blue or black)</span> {<br>
-  &nbsp;&nbsp;<span class="code-act">tap desk</span><br><br>
-
+  &nbsp;&nbsp;<span class="code-act">clap once</span><br>
+  &nbsp;&nbsp;<span class="code-act">pause for 1 second</span><br><br>
   &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(color changes)</span> {<br>
   &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">stop immediately</span><br>
   &nbsp;&nbsp;}<br>
@@ -86,8 +98,8 @@ function showGame(game) {
   <span class="code-key running-loop">while</span> <span class="code-cond">(guess is not correct)</span> {<br>
   &nbsp;&nbsp;<span class="code-act">students guess</span><br><br>
 
-  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(correct guess)</span> {<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">you are safe</span><br>
+  &nbsp;&nbsp;<span class="code-key">if</span> <span class="code-cond">(someone says wrong number)</span> {<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-act">eliminated</span><br>
   &nbsp;&nbsp;}<br>
   }<br>
   `;
@@ -146,13 +158,15 @@ function selectGame(card, game) {
 let running = false;
 
 const colors = [
-  "#2563eb", // blue safe
-  "#000000", // black safe
-  "#ff0000",
-  "#22c55e",
-  "#facc15",
-  "#a855f7",
-  "#ffffff",
+  "#2563eb",
+  "#000000",
+  "#172554", // midnight blue
+  "#27272a", // soft black
+  "#ff0000", // red
+  "#22c55e", // green
+  "#facc15", // yellow
+  "#a855f7", // purple
+  "#ffffff", // white
 ];
 
 function startColorLoop() {
@@ -181,7 +195,8 @@ function runShuffleCycle() {
       const finalColor = colors[Math.floor(Math.random() * colors.length)];
       box.style.backgroundColor = finalColor;
 
-      const pause = Math.random() * 3000 + 400;
+      const pause = Math.random() * 3000 + 5000;
+
       setTimeout(runShuffleCycle, pause);
     }
   }, 70);
